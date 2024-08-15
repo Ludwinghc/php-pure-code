@@ -7,14 +7,15 @@
         protected $data_base = 'ventas-aaa';
 				
 				public function open_conexion(){
-				try {
-					
-					$link = mysqli_connect($this->server, $this->user, $this->passw) 
-                    or die ('No se pudo conectar con la base de datos');
-                    echo 'conexion exitosa';
-                    return $link;
+				try {					
+					$link = mysqli_connect($this->server, $this->user, $this->passw, $this->data_base);
+					if (! $link) {
+						die("Error al conectar la base de datos :". mysqli_connect_error());
+					}
+					// echo "Conexion exitosa";
+					return $link;
 				} catch (Exception $e) {
-					echo $e -> getMessage();
+					echo $e->getMessage();
                     return null;
 				}
 				}
